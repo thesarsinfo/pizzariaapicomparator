@@ -1,16 +1,20 @@
 package com.univesp.pi.pizzariacomparator.Service;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +25,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.univesp.pi.pizzariacomparator.DTO.Usuario.UsuarioDTOCriar;
 import com.univesp.pi.pizzariacomparator.Exception.ResourceNotFoundException;
 import com.univesp.pi.pizzariacomparator.Model.Role;
@@ -28,7 +34,7 @@ import com.univesp.pi.pizzariacomparator.Model.Usuario;
 import com.univesp.pi.pizzariacomparator.Repository.UsuarioRepository;
 
 @Service
-@Transactional
+
 public class UsuarioService implements UserDetailsService{
     @Autowired
     private UsuarioRepository usuarioRepository;  
@@ -36,6 +42,7 @@ public class UsuarioService implements UserDetailsService{
     private RoleService roleService;  
     @Autowired
     private ModelMapper usuarioMapper;
+    
 
     public Usuario salvarUsuario(UsuarioDTOCriar usuarioDTO) {
         Usuario usuarioSalvar = new Usuario();
@@ -108,10 +115,13 @@ public class UsuarioService implements UserDetailsService{
         usuarioRepository.delete(usuarioAtual);
     } 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByemail(email)
                         .orElseThrow(() -> new UsernameNotFoundException("Usuario não encontrado: " + email));
-        return new User(usuario.getUsername(),usuario.getPassword(),true,true,true,true, usuario.getAuthorities());
+        return usuario;
     }
+ 
+
     
 }

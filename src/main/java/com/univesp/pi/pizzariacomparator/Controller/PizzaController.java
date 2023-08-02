@@ -23,8 +23,11 @@ import com.univesp.pi.pizzariacomparator.DTO.Pizza.PizzaDTOCriar;
 import com.univesp.pi.pizzariacomparator.Model.Pizza;
 import com.univesp.pi.pizzariacomparator.Service.PizzaService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping(value = "/v1/api/pizza")
+@SecurityRequirement(name = "bearerAuth")
 public class PizzaController {
     @Autowired
     private PizzaService pizzaService;

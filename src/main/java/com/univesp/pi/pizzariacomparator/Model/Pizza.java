@@ -20,6 +20,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_pizza")
 public class Pizza implements Serializable{
+    
+
+
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "varbinary(36)")

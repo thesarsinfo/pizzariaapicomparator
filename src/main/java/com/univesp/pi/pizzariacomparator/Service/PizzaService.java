@@ -18,11 +18,14 @@ import com.univesp.pi.pizzariacomparator.Exception.ResourceNotFoundException;
 import com.univesp.pi.pizzariacomparator.Model.Pizza;
 import com.univesp.pi.pizzariacomparator.Repository.PizzaRepository;
 
-@Service()
+@Service
 public class PizzaService {
     
     @Autowired
     private PizzaRepository pizzaRepository;  
+    public PizzaService(PizzaRepository pizzaRepository) {
+        this.pizzaRepository = pizzaRepository;
+    }
     @Autowired
     private ModelMapper pizzaMapper;
 
