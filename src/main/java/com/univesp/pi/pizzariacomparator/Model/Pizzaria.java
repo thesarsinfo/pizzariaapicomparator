@@ -54,7 +54,7 @@ public class Pizzaria {
     private String site;
     //
     @Size(max = 15)
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = false)
 	@NotBlank
     private String telefone;
     //
