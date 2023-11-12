@@ -68,7 +68,7 @@ public class PizzaPizzariaController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> atulizarPizzaPizzariaPatch(@PathVariable UUID id, @RequestBody PizzaPizzariaDTOCriar atualizarPatch) {
+    public ResponseEntity<String> atulizarPizzaPizzariaPatch(@PathVariable UUID id, @RequestBody PizzaPizzariaDTOPut atualizarPatch) {
         pizzaPizzariariaService.atualizarParcialmentePizzaPizzaria(id, atualizarPatch);
         return ResponseEntity.ok("Dados atualizados com sucesso");
     }

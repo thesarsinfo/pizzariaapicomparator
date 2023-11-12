@@ -81,10 +81,10 @@ public class PizzaPizzariaService {
         pizzaPizzariaMapper.map(pizzaPizzariaAtualizada,pizzaPizzariaAtual);
         return pizzaPizzariaRepository.save(pizzaPizzariaAtual);       
     }
-    public PizzaPizzaria atualizarParcialmentePizzaPizzaria(UUID id, PizzaPizzariaDTOCriar pizzaPizzariaAtualizada) {
+    public PizzaPizzaria atualizarParcialmentePizzaPizzaria(UUID id, PizzaPizzariaDTOPut pizzaPizzariaAtualizada) {
         PizzaPizzaria pizzaPizzariaAtual = buscarPizzaPizzariaPorId(id);
         
-        List<Field> fields = Arrays.asList(PizzaPizzariaDTOCriar.class.getDeclaredFields());
+        List<Field> fields = Arrays.asList(PizzaPizzariaDTOPut.class.getDeclaredFields());
         for (Field field : fields) {
             try {
                 field.setAccessible(true);

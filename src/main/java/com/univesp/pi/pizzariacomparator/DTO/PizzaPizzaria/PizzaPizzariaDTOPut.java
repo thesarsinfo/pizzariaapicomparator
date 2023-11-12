@@ -1,5 +1,7 @@
 package com.univesp.pi.pizzariacomparator.DTO.PizzaPizzaria;
 
+import java.math.BigDecimal;
+
 import com.univesp.pi.pizzariacomparator.DTO.Pizza.PizzaDTOPut;
 import com.univesp.pi.pizzariacomparator.DTO.Pizzaria.PizzariaDTO;
 
@@ -14,5 +16,6 @@ public class PizzaPizzariaDTOPut {
 
     private PizzariaDTO pizzaria;
     private PizzaDTOPut pizza;
+    private BigDecimal preco;
     
 }
