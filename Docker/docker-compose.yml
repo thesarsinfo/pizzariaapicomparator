@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: b4B4D0GP0K@
+      MYSQL_DATABASE: pizzaria
+      MYSQL_USER: root
+      MYSQL_PASSWORD: b4B4D0GP0K@
