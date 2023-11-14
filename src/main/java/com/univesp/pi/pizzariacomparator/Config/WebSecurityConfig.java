@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 
@@ -22,6 +25,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
     @Autowired
     private FilterToken filter;
+
+        @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*");  // Permitir solicitações de qualquer origem
+        configuration.addAllowedMethod("*");  // Permitir todos os métodos HTTP (GET, POST, PUT, DELETE, etc.)
+        configuration.addAllowedHeader("*");  // Permitir todos os cabeçalhos
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
 
     private static final String[] AUTH_WHITELIST = {
         // -- Swagger UI v2
@@ -39,7 +55,9 @@ public class WebSecurityConfig {
         return http
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
+            .and()            
+            .cors()
+            .and()  
             .authorizeHttpRequests()
             .antMatchers(HttpMethod.POST, "/v1/api/usuario/**").permitAll() 
             .antMatchers(HttpMethod.POST, "/v1/api/role/**").permitAll() 
